@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.myprojects.coursespringboot.entities.Category;
 import com.myprojects.coursespringboot.entities.Order;
+import com.myprojects.coursespringboot.entities.OrderItem;
 import com.myprojects.coursespringboot.entities.Product;
 import com.myprojects.coursespringboot.entities.User;
 import com.myprojects.coursespringboot.entities.enums.OrderStatus;
 import com.myprojects.coursespringboot.repositories.CategoryRepository;
+import com.myprojects.coursespringboot.repositories.OrderItemRepository;
 import com.myprojects.coursespringboot.repositories.OrderRepository;
 import com.myprojects.coursespringboot.repositories.ProductRepository;
 import com.myprojects.coursespringboot.repositories.UserRepository;
@@ -34,6 +36,9 @@ public class TestConfig implements CommandLineRunner { // vai ter que ter uma de
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	// Como fazer para executar qdo o programa por iniciado? Implementando CommandLineRunner
 	@Override
@@ -73,6 +78,12 @@ public class TestConfig implements CommandLineRunner { // vai ter que ter uma de
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 		
 		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 		
 	}
 }
